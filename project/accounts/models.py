@@ -7,6 +7,12 @@ from .managers import UserManger
 
 # Create your models here.
 
+class Role(models.TextChoices):
+    ADMIN = 'admin', 'Admin'
+    SELLER = 'seller', 'Seller'
+    BUYER = 'buyer', 'Buyer'
+    
+
 
 class User(AbstractBaseUser, PermissionsMixin):
 
@@ -18,7 +24,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
-
+    role = models.CharField(max_length=10, choices=Role.choices, default=Role.BUYER)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['first_name', 'last_name']
