@@ -6,7 +6,6 @@ from products.models import Category
 
 class ProductSerializer(serializers.ModelSerializer):
     seller = serializers.PrimaryKeyRelatedField(read_only = True)
-    category = serializers.CharField(source = 'category.name')
 
     class Meta:
         model = Product
@@ -16,11 +15,12 @@ class ProductSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         validated_data['seller'] = self.context['request'].user
-        return super().create(validated_data)
+        return Product.objects.create(**validated_data)
     
 
     def validate(self, attrs):
         user = self.context['request'].user
+        name = attrs.get('name')
 
         # CREATE
         if self.instance is None:
@@ -31,6 +31,11 @@ class ProductSerializer(serializers.ModelSerializer):
         else:
             if self.instance.seller != user:
                 raise serializers.ValidationError("You can only update your own products")
+
+        if Product.objects.filter(seller=user, name=name).exists():
+            raise serializers.ValidationError(
+                {'name': 'You already have a product with this name.'}
+            )
 
         return attrs
 

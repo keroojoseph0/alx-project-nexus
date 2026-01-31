@@ -33,6 +33,7 @@ class Product(models.Model):
     update_ad = models.DateTimeField(auto_now=True)
     description = models.TextField(null = True, blank = True)
 
+
     def __str__(self):
         return self.name
 

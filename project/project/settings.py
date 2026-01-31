@@ -47,11 +47,13 @@ INSTALLED_APPS = [
     'accounts',
     'sellers',
     'products',
+    'orders',
 
 
     'drf_yasg',
     'django_celery_results',
     'django_celery_beat',
+    'rest_framework',
 ]
 
 REST_FRAMEWORK = {
@@ -60,6 +62,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 
 
