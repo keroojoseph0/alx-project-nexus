@@ -9,14 +9,14 @@ from rest_framework import status
 
 @admin.register(SellerApplication)
 class SellerApplicationAdmin(admin.ModelAdmin):
-    list_display = ('seller', 'status')
+    list_display = ('seller', 'status', 'created_at')
     list_filter = ('status',)
     search_fields = ('seller__email', 'seller__first_name', 'seller__last_name')
     actions = ['approve_seller', 'reject_seller']
     
     def approve_seller(self, request, queryset):
         for application in queryset:
-            user = application.user
+            user = application.seller
 
             with transaction.atomic():
                 user.role = Role.SELLER
@@ -35,7 +35,7 @@ class SellerApplicationAdmin(admin.ModelAdmin):
 
     def reject_seller(self, request, queryset):
         for application in queryset:
-            user = application.user
+            user = application.seller
 
             if application.status == Status.REJECTED:
                     continue

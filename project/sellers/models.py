@@ -14,6 +14,7 @@ class Status(models.TextChoices):
 class SellerApplication(models.Model):
     seller = models.OneToOneField(User, on_delete=models.CASCADE, related_name='seller_application')
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.email
+        return str(self.seller.email)

@@ -4,11 +4,11 @@ from .models import SellerApplication
 
 
 class SellerApplicationSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    seller = serializers.PrimaryKeyRelatedField(read_only=True)
     
     class Meta:
         model = SellerApplication
-        fields = ['seller', 'status']
+        fields = ['seller', 'status', 'created_at']
         read_only_fields = ['status']
 
     def create(self, validated_data):

@@ -1,23 +1,22 @@
 from django.shortcuts import render
-from pytz import timezone
-
 from sellers.models import SellerApplication
 from .serializers import SellerApplicationSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.utils import timezone
 
 # Create your views here.
 
 
 @api_view(['POST'])
 def apply_as_seller(request):
-    serializer = SellerApplicationSerializer(data=request.data)
-    application = SellerApplication.objects.filter(user=request.user).first()
+    serializer = SellerApplicationSerializer(data=request.data, context = {'request': request})
+    application = SellerApplication.objects.filter(seller=request.user).first()
 
     if serializer.is_valid():
         if not application:
-            serializer.save(user=request.user)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         if application.status == 'pending':

@@ -4,13 +4,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 import uuid
 from .managers import UserManger
+from .roles import Role
 
 # Create your models here.
 
-class Role(models.TextChoices):
-    ADMIN = 'admin', 'Admin'
-    SELLER = 'seller', 'Seller'
-    BUYER = 'buyer', 'Buyer'
     
 
 
