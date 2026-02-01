@@ -50,6 +50,9 @@ urlpatterns = [
     path('api/', include('products.urls', namespace = 'products')),
     path('api/', include('orders.urls', namespace = 'orders')),
     path('api/', include('carts.urls', namespace = 'carts')),
+    path('api/', include('reviews.urls', namespace = 'reviews')),
+    path('api/', include('shipping_addresses.urls', namespace = 'shipping_addresses')),
+    path('api/', include('payments.urls', namespace = 'payments')),
 
 
 

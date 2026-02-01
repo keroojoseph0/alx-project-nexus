@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'carts',
+    'reviews',
+    'shipping_addresses',
+    'payments',
 
 
     'drf_yasg',
