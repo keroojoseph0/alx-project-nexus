@@ -9,6 +9,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['user__email', 'id', 'status', 'created_at', 'total_price']
     search_fields = ['user__eamil', 'status']
     ordering = ['created_at']
+    list_filter = ['status']
 
 
 @admin.register(OrderItem)
