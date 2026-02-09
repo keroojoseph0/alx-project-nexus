@@ -122,25 +122,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.getenv("DJ_DATABASE_URL"),
-#         conn_max_age=600,
-#         ssl_require=False
-#     ) 
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nexus_db',
-        'USER': 'postgres',
-        'PASSWORD': 'keroo123',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-        
+    'default': dj_database_url.config(
+        default=os.getenv("DJ_DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=False
+    ) 
     
+}
 
 
 # Password validation
