@@ -123,12 +123,10 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("DJ_DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=False
-    ) 
-    
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "nexus-db",
+    }
 }
 
 
